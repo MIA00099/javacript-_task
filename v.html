@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers' Crop Trading System</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Internal CSS for demonstration (normally this would be in the external file) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: #2E7D32;
+        }
+        
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #todo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #todo-list li {
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        .calculator-result {
+            font-weight: bold;
+            color: #2E7D32;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Farmers' Crop Trading System</h1>
+        <p>Connecting farmers with buyers for fair trade</p>
+    </header>
+
+    <!-- Table Section -->
+    <section class="section">
+        <h2>Current Market Prices</h2>
+        <table id="crop-prices">
+            <thead>
+                <tr>
+                    <th>Crop</th>
+                    <th>Quality Grade</th>
+                    <th>Price per Kg (₹)</th>
+                    <th>Available Quantity (Kg)</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Wheat</td>
+                    <td>A</td>
+                    <td>22.50</td>
+                    <td>1500</td>
+                    <td>2023-06-15</td>
+                </tr>
+                <tr>
+                    <td>Rice</td>
+                    <td>B</td>
+                    <td>28.75</td>
+                    <td>800</td>
+                    <td>2023-06-14</td>
+                </tr>
+                <tr>
+                    <td>Corn</td>
+                    <td>A</td>
+                    <td>18.20</td>
+                    <td>2200</td>
+                    <td>2023-06-15</td>
+                </tr>
+                <tr>
+                    <td>Soybean</td>
+                    <td>C</td>
+                    <td>35.40</td>
+                    <td>500</td>
+                    <td>2023-06-13</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Form Section -->
+    <section class="section">
+        <h2>Crop Trading Form</h2>
+        <form id="trading-form">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">I am a:</label>
+                <select id="role" name="role" required>
+                    <option value="">Select role</option>
+                    <option value="farmer">Farmer/Seller</option>
+                    <option value="buyer">Buyer</option>
+                    <option value="trader">Trader</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="crop-type">Crop Type:</label>
+                <select id="crop-type" name="crop-type" required>
+                    <option value="">Select crop</option>
+                    <option value="wheat">Wheat</option>
+                    <option value="rice">Rice</option>
+                    <option value="corn">Corn</option>
+                    <option value="soybean">Soybean</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity (in Kg):</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="quality">Quality Grade:</label>
+                <select id="quality" name="quality" required>
+                    <option value="">Select grade</option>
+                    <option value="A">A (Premium)</option>
+                    <option value="B">B (Good)</option>
+                    <option value="C">C (Standard)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Expected Price per Kg (₹):</label>
+                <input type="number" id="price" name="price" min="0.01" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="harvest-date">Harvest Date:</label>
+                <input type="date" id="harvest-date" name="harvest-date">
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Additional Notes:</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+            </div>
+            
+            <button type="submit">Submit Trade Offer</button>
+        </form>
+    </section>
+
+    <!-- To-Do List Section -->
+    <section class="section">
+        <h2>Farm Tasks To-Do List</h2>
+        <div class="form-group">
+            <input type="text" id="todo-input" placeholder="Add a new farm task...">
+            <button onclick="addTodo()">Add Task</button>
+        </div>
+        <ul id="todo-list"></ul>
+    </section>
+
+    <!-- JavaScript Demonstration Section -->
+    <section class="section">
+        <h2>Crop Profit Calculator</h2>
+        
+        <div class="form-group">
+            <label for="crop-quantity">Crop Quantity (Kg):</label>
+            <input type="number" id="crop-quantity" value="100">
+        </div>
+        
+        <div class="form-group">
+            <label for="crop-price">Selling Price per Kg (₹):</label>
+            <input type="number" id="crop-price" value="25">
+        </div>
+        
+        <div class="form-group">
+            <label for="production-cost">Production Cost per Kg (₹):</label>
+            <input type="number" id="production-cost" value="15">
+        </div>
+        
+        <button onclick="calculateProfit()">Calculate Profit</button>
+        
+        <div id="calculator-result" class="calculator-result"></div>
+        
+        <h3>JavaScript Concepts Demonstrated:</h3>
+        <div id="js-concepts"></div>
+    </section>
+
+    <script>
+        // To-Do List functionality
+        let todos = [];
+        
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const todoText = input.value.trim();
+            
+            if (todoText) {
+                todos.push(todoText);
+                input.value = '';
+                renderTodoList();
+            }
+        }
+        
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            renderTodoList();
+        }
+        
+        function renderTodoList() {
+            const list = document.getElementById('todo-list');
+            list.innerHTML = '';
+            
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${todo}</span>
+                    <button class="delete-btn" onclick="deleteTodo(${index})">Delete</button>
+                `;
+                list.appendChild(li);
+            });
+        }
+        
+        // Crop Profit Calculator with JavaScript concepts
+        function calculateProfit() {
+            // Variables
+            const quantity = parseFloat(document.getElementById('crop-quantity').value);
+            const price = parseFloat(document.getElementById('crop-price').value);
+            const cost = parseFloat(document.getElementById('production-cost').value);
+            
+            // Operators
+            const totalRevenue = quantity * price;
+            const totalCost = quantity * cost;
+            const profit = totalRevenue - totalCost;
+            const profitPerKg = price - cost;
+            
+            // Conditional statement
+            let message;
+            if (profit > 0) {
+                message = `You will make a profit of ₹${profit.toFixed(2)} (₹${profitPerKg.toFixed(2)} per Kg).`;
+            } else if (profit < 0) {
+                message = `You will have a loss of ₹${Math.abs(profit).toFixed(2)} (₹${Math.abs(profitPerKg).toFixed(2)} per Kg).`;
+            } else {
+                message = "You will break even (no profit or loss).";
+            }
+            
+            document.getElementById('calculator-result').textContent = message;
+            
+            // Display JavaScript concepts
+            const concepts = [
+                "Variables: Used to store input values (quantity, price, cost)",
+                "Operators: Used for calculations (* for multiplication, - for subtraction)",
+                "Conditional Statements: if/else to determine profit/loss message"
+            ];
+            
+            const conceptsList = document.getElementById('js-concepts');
+            conceptsList.innerHTML = concepts.map(concept => `<li>${concept}</li>`).join('');
+        }
+        
+        // Initialize with some sample todos
+        todos = [
+            "Prepare soil for next planting",
+            "Order new seeds",
+            "Schedule irrigation system check",
+            "Contact buyers for wheat harvest"
+        ];
+        renderTodoList();
+        
+        // Calculate initial profit
+        calculateProfit();
+    </script>
+</body>
+</html>
